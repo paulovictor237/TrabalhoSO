@@ -1,0 +1,1 @@
+cmd_/home/pi/Documents/TrabalhoSO/os-master/HelloKernel/hello.ko := ld -r  -EL -T ./scripts/module-common.lds -T ./arch/arm/kernel/module.lds  --build-id  -o /home/pi/Documents/TrabalhoSO/os-master/HelloKernel/hello.ko /home/pi/Documents/TrabalhoSO/os-master/HelloKernel/hello.o /home/pi/Documents/TrabalhoSO/os-master/HelloKernel/hello.mod.o ;  true
