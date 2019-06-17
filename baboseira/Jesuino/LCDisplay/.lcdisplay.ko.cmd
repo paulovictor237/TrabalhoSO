@@ -1,0 +1,1 @@
+cmd_/home/pi/Desktop/TrabalhoSO/baboseira/Jesuino/LCDisplay/lcdisplay.ko := ld -r  -EL -T ./scripts/module-common.lds -T ./arch/arm/kernel/module.lds  --build-id  -o /home/pi/Desktop/TrabalhoSO/baboseira/Jesuino/LCDisplay/lcdisplay.ko /home/pi/Desktop/TrabalhoSO/baboseira/Jesuino/LCDisplay/lcdisplay.o /home/pi/Desktop/TrabalhoSO/baboseira/Jesuino/LCDisplay/lcdisplay.mod.o ;  true

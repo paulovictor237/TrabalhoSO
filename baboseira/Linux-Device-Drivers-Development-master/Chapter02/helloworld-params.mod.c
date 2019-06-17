@@ -26,6 +26,9 @@ static const struct modversion_info ____versions[]
 __used
 __attribute__((section("__versions"))) = {
 	{ 0x90b4ce31, "module_layout" },
+	{ 0x97a2f2ea, "param_ops_charp" },
+	{ 0xea5181bb, "param_array_ops" },
+	{ 0xfd958c00, "param_ops_int" },
 	{ 0x2e5810c6, "__aeabi_unwind_cpp_pr1" },
 	{ 0x7c32d0f0, "printk" },
 	{ 0xb1ad28e0, "__gnu_mcount_nc" },
@@ -37,4 +40,4 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "84A06252A4302979FD74925");
+MODULE_INFO(srcversion, "5B334695A9AD9E39C40D161");
