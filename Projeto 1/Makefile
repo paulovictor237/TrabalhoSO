@@ -30,7 +30,6 @@ run:
 	gcc $(APPLICATION).c -o $(APPLICATION) -pthread -Wall
 	./$(APPLICATION)
 
-	# Compile and run the application test
 print:
 	dmesg | tail
 
