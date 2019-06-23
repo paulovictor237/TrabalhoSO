@@ -613,11 +613,8 @@ void lcdsetbacklight(lcd_t *l, u8 bl)
 module_init(lcdisplay_init);
 module_exit(lcdisplay_exit);
 
-MODULE_DESCRIPTION("LCD Display I2C");
-MODULE_AUTHOR("Jesuino Vieira Filho, Lucas de Camargo Souza");
-MODULE_LICENSE("GPL");
+MODULE_LICENSE("GPL");              ///< The license type -- this affects runtime behavior
+MODULE_AUTHOR("Paulo Victor & Matheus Luiz");      ///< The author -- visible when you use modinfo
+MODULE_DESCRIPTION("Driver I2C LCD Display");  ///< The description -- see modinfo
+MODULE_VERSION("1.0");              ///< The version of the module
 
-// MODULE_LICENSE("GPL");              ///< The license type -- this affects runtime behavior
-// MODULE_AUTHOR("Paulo Victor & Matheus Luiz");      ///< The author -- visible when you use modinfo
-// MODULE_DESCRIPTION("Driver para tel LCD");  ///< The description -- see modinfo
-// MODULE_VERSION("1.0");              ///< The version of the module

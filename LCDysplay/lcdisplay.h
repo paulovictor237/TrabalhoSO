@@ -21,7 +21,7 @@
 // ========================================================
 // Useful defines
 
-#define LCD_ADDRESS 		0x3F 		// Device address
+#define LCD_ADDRESS 		0x27//0x3F 		// Device address
 #define LCD_NAME 			"lcdisplay" // Device name
 
 #define LCD_CHR             0x01 		// Mode - Sending data
