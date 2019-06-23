@@ -1,15 +1,3 @@
-/*
- * lcdisplay.c -- char module.
- *
- *  Copyright (C) 2018 Jesuino Vieira Filho
- *  Copyright (C) 2018 Lucas de Camargo Souza
- *
- * The source code in this file can be freely used, adapted,
- * and redistributed in source or binary form, so long as an
- * acknowledgment appears in derived source files. No warranty 
- * is attached; we cannot take responsibility for errors or 
- * fitness for use.
- */
 
 #include <linux/module.h>
 #include <linux/moduleparam.h>

@@ -33,7 +33,8 @@ run:
 print:
 	dmesg | tail
 
-modulos:
-	lsmod
 info:
 	modinfo ./$(TARGET_MODULE).ko
+
+modulos:
+	lsmod
