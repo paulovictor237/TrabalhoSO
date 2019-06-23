@@ -1249,7 +1249,7 @@ void lcdinit(LcdData_t *lcd, lcd_topology topo)
 module_init(i2clcd857_init);
 module_exit(i2clcd857_exit);
 
-MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Jarek Zok <jarekzok@gmail.com>");
-MODULE_DESCRIPTION("Driver for HD44780 LCD with PCF8574 I2C extension.");
-MODULE_VERSION("0.1.0");
+MODULE_LICENSE("GPL");              ///< The license type -- this affects runtime behavior
+MODULE_AUTHOR("Paulo Victor & Matheus Luiz");      ///< The author -- visible when you use modinfo
+MODULE_DESCRIPTION("Driver para tel LCD");  ///< The description -- see modinfo
+MODULE_VERSION("1.0");              ///< The version of the module
