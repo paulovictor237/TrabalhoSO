@@ -115,18 +115,15 @@ class lcdd{
 public:
 	lcdd(){
 		fd = open("/dev/lcdisplay", O_RDWR);
-		
-		ioctl(fd,0x03,0);
-		ioctl(fd,0x03,0);
-		ioctl(fd,0x03,0);
-		ioctl(fd,0x02,0);
-
-		ioctl(fd,LCD_FUNCTIONSET | LCD_2LINE | LCD_5x8DOTS | LCD_4BITMODE,0);
-		ioctl(fd,LCD_DISPLAYCONTROL | LCD_DISPLAYON,0);
-		ioctl(fd,LCD_CLEARDISPLAY,0);
-		ioctl(fd,LCD_ENTRYMODESET | LCD_ENTRYLEFT,0);
-		sleep(0.2);
-		
+		// ioctl(fd,0x03,0);
+		// ioctl(fd,0x03,0);
+		// ioctl(fd,0x03,0);
+		// ioctl(fd,0x02,0);
+		// ioctl(fd,LCD_FUNCTIONSET | LCD_2LINE | LCD_5x8DOTS | LCD_4BITMODE,0);
+		// ioctl(fd,LCD_DISPLAYCONTROL | LCD_DISPLAYON,0);
+		// ioctl(fd,LCD_CLEARDISPLAY,0);
+		// ioctl(fd,LCD_ENTRYMODESET | LCD_ENTRYLEFT,0);
+		// sleep(0.2);
 		write(fd, "Test session 2", 0);
 		sleep(2);
 	}
@@ -134,13 +131,14 @@ public:
 		//close(fd);
 	}
 
-	void caralho(const char* palavra,int line=2,int pos=0){
+	void lcd_display_string(const char* palavra,int line=2,int pos=0){
 		if (line == 1)pos_new = pos;
 		else if (line == 2)pos_new = 0x40 + pos;
 		else if (line == 3) pos_new = 0x14 + pos;
 		else if (line == 4)pos_new = 0x54 + pos;
-		ioctl(fd, LCD_CLEARDISPLAY, 0);
-		ioctl(fd, 0x80 + 0x54, 0);
+		// ioctl(fd, LCD_CLEARDISPLAY, 0);
+		// ioctl(fd, 0x80 + pos_new, 0);
+		ioctl(fd, 0x27, 0);
 		write(fd, palavra, 0x80);
 		sleep(3);
 	}
@@ -154,7 +152,7 @@ int main()
 	printf("teste\n");
 	char sair;
 	lcdd displaypv;
-	displaypv.caralho("teste do pv");
+	displaypv.lcd_display_string("teste do pv");
 	std::cin >> sair;
 	return 0;
 }

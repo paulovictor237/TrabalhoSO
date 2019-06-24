@@ -290,7 +290,14 @@ static long lcdisplay_ioctl(struct file *file, unsigned int cmd, unsigned long a
 		case LCD_BACKLIGHT:
 			lcdsetbacklight(lcd, arg);
 			break;
-
+		case 0x27:
+			//code
+			lcd->column = 0x40;
+    		lcd->row = 3;
+			printk(KERN_DEBUG "entrou no 0x27\n");
+			// lcdsend(l, LCD_CLEAR, LCD_CMD);
+			// I2C_WRITE(l->handle, bl ? LCD_BACKLIGHT : 0);
+			break;
 		default:
 			printk(KERN_DEBUG "LCDisplay: unknown IOCTL\n");
 	      	break; 
