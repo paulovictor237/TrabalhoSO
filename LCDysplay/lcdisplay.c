@@ -279,23 +279,23 @@ static long lcdisplay_ioctl(struct file *file, unsigned int cmd, unsigned long a
 
 	switch(cmd)
 	{
-		case LCD_CLEAR:
+		case LCD_CLEARDISPLAY://LCD_CLEAR:
 			lcdclear(lcd);
 			break;
 		
-		case LCD_HOME:
+		case LCD_RETURNHOME://LCD_HOME:
 			lcdhome(lcd);
 			break;
 
 		case LCD_BACKLIGHT:
 			lcdsetbacklight(lcd, arg);
 			break;
-		case 0x27:
+		case LCD_DISPLAYCONTROL:
 			//code
 			lcd->column = 0;
 			lcd->row = 0;
-			printk(KERN_DEBUG "entrou no 23\n");
-			lcdsend(lcd, 0x80 + 0x14+ 3, LCD_CMD);
+			printk(KERN_DEBUG "entrou no LCD_DISPLAYCONTROL\n");
+			lcdsend(lcd,arg, LCD_CMD);
 			//lcdsend(lcd, 0, 0x80 + 0x40);
 			// I2C_WRITE(l->handle, bl ? LCD_BACKLIGHT : 0);
 			break;
@@ -308,6 +308,12 @@ static long lcdisplay_ioctl(struct file *file, unsigned int cmd, unsigned long a
 
 	return 0;
 }
+
+
+
+
+
+
 
 /*
  * Invoked when the module is loaded into the kernel
