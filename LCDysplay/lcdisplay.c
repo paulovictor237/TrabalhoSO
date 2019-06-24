@@ -292,10 +292,11 @@ static long lcdisplay_ioctl(struct file *file, unsigned int cmd, unsigned long a
 			break;
 		case 0x27:
 			//code
-			lcd->column = 0x40;
-    		lcd->row = 3;
-			printk(KERN_DEBUG "entrou no 0x27\n");
-			// lcdsend(l, LCD_CLEAR, LCD_CMD);
+			lcd->column = 0;
+			lcd->row = 0;
+			printk(KERN_DEBUG "entrou no 23\n");
+			lcdsend(lcd, 0x80 + 0x14+ 3, LCD_CMD);
+			//lcdsend(lcd, 0, 0x80 + 0x40);
 			// I2C_WRITE(l->handle, bl ? LCD_BACKLIGHT : 0);
 			break;
 		default:
