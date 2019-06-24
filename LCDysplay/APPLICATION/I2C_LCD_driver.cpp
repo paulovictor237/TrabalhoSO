@@ -78,8 +78,8 @@ public:
 		else if (line == 2)pos_new = 0x40 + pos;
 		else if (line == 3) pos_new = 0x14 + pos;
 		else if (line == 4)pos_new = 0x54 + pos;
-		ioctl(fd, LCD_DISPLAYCONTROL, pos_new);
-		write(fd, palavra, 0x80);
+		ioctl(fd, LCD_CURSORSHIFT, pos_new);
+		write(fd, palavra, 0);
 		sleep(3);
 	}
    	void lcd_clear(void){
@@ -98,7 +98,9 @@ int main()
 	printf("teste\n");
 	char sair;
 	lcdd displaypv;
-	displaypv.lcd_display_string("teste do pv");
+	displaypv.lcd_clear();
+	displaypv.lcd_display_string("teste do pv",2,4);
+	
 	std::cin >> sair;
 	return 0;
 }

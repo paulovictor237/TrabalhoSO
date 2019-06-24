@@ -290,12 +290,12 @@ static long lcdisplay_ioctl(struct file *file, unsigned int cmd, unsigned long a
 		case LCD_BACKLIGHT:
 			lcdsetbacklight(lcd, arg);
 			break;
-		case LCD_DISPLAYCONTROL:
+		case LCD_CURSORSHIFT:
 			//code
 			lcd->column = 0;
 			lcd->row = 0;
 			printk(KERN_DEBUG "entrou no LCD_DISPLAYCONTROL\n");
-			lcdsend(lcd,arg, LCD_CMD);
+			lcdsend(lcd,0x80 + arg , LCD_CMD);
 			//lcdsend(lcd, 0, 0x80 + 0x40);
 			// I2C_WRITE(l->handle, bl ? LCD_BACKLIGHT : 0);
 			break;

@@ -60,4 +60,4 @@ __attribute__((section(".modinfo"))) =
 
 MODULE_ALIAS("i2c:lcdisplay");
 
-MODULE_INFO(srcversion, "16EF6B264D5ED780B3076A1");
+MODULE_INFO(srcversion, "4D839E9214AE0C786728287");
