@@ -98,9 +98,8 @@ int main()
 	printf("teste\n");
 	char sair;
 	lcdd displaypv;
-	displaypv.lcd_clear();
+	//displaypv.lcd_clear();
 	displaypv.lcd_display_string("teste do pv",2,4);
-	
 	std::cin >> sair;
 	return 0;
 }
