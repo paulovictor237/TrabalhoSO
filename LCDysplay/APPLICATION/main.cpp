@@ -5,10 +5,10 @@
 
 using namespace std;
 
-// arrumar o move cursor
+// arrumar o move cursor - OK
 // arrumar o make file applicacao
 // manter desligada a tela
-// mensagem inicial
+// mensagem inicial -OK
 
 int main(int argc, char const *argv[])
 {
@@ -20,23 +20,14 @@ int main(int argc, char const *argv[])
     sleep(1);
     //-----------------------------
     displaypv.lcdd::lcd_clear();
-    sleep(1);
-    displaypv.mover_cursor(2,3);
 	sleep(1);
 	displaypv.lcdd::lcd_display_string("batatinha MC'Donalds");
 	sleep(1);
 	displaypv.lcdd::lcd_clear();
-    sleep(1);
-	displaypv.mover_cursor(1,0);
 	sleep(1);
 	displaypv.lcdd::typeFloat(13.45);
 	sleep(1);
-	//VERIFICAR MOVE CURSOR
-	displaypv.mover_cursor(2,8);
-	sleep(1);
 	displaypv.lcdd::typeInt(55,2,8);
-	sleep(1);
-	displaypv.lcdd::home();
 	sleep(1);
 	displaypv.lcdd::lcd_clear();
 	displaypv.lcdd::lcd_display_string("desligar luz");

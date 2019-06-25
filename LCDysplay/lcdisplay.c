@@ -172,17 +172,17 @@ static int lcdisplay_remove(struct i2c_client *client)
  */
 static int lcdisplay_open(struct inode *inode, struct file *file)
 {
-	printk(KERN_DEBUG "LCDisplay: lcdisplay_open() is called\n");
+    printk(KERN_DEBUG "LCDisplay: lcdisplay_open() is called\n");
 
-	if(mutex_lock_interruptible(&lcd->mtx))
-		return -ERESTARTSYS;
+    if(mutex_lock_interruptible(&lcd->mtx))return -ERESTARTSYS;
 		
     try_module_get(THIS_MODULE);
 
     lcdrestart(lcd);
+    // CERVEJA
     lcdsetbacklight(lcd, 1);
 
-	mutex_unlock(&lcd->mtx);
+    mutex_unlock(&lcd->mtx);
 	
     return 0;
 }
@@ -493,7 +493,8 @@ void lcdinit(lcd_t *l)
 	l->column = 0;
 
 	lcdsend(l, LCD_LINE0, LCD_CMD);
-	lcdwrite(l, "Driver LCDisplay");
+	//lcdwrite(l, "Driver LCDisplay");
+	lcdwrite(l, "Driver Iniciado");
 }
 
 /*
@@ -510,6 +511,7 @@ void lcdfinalize(lcd_t *l)
 		return;
 	
 	lcdrestart(l);
+	// CERVEJA
 	lcdsetbacklight(l, 0);
 }
 

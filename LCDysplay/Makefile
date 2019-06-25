@@ -41,6 +41,6 @@ modulos:
 
 app:
 	cd APPLICATION; \
-    g++ *.cpp -o Executavel -pthread -Wall; \
+    g++ *.cpp -o Executavel -pthread; \
     ./Executavel
 	

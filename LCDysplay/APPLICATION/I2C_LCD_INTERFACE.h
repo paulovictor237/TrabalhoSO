@@ -28,43 +28,33 @@ public:
     /**
         * Construtor
     */
-	lcdd();
+    lcdd();
     /**
         * Destrutor
     */
-	~lcdd();
-    /** 
-        * Move o cursor
-        * line -> linha 1 - 2
-        * pos -> coluna 0 - 16
-    */
-	void mover_cursor(unsigned int line,unsigned int pos);
+    ~lcdd();
     /** 
         * Escreve uma String
         * line -> linha 1 - 2
         * pos -> coluna 0 - 16
     */
-	void lcd_display_string(const char* palavra,unsigned int line=1,unsigned int pos=0);
+    void lcd_display_string(const char* palavra,unsigned int line=1,unsigned int pos=0);
     /** 
         * Escreve um  float
         * line -> linha 1 - 2
         * pos -> coluna 0 - 16
     */
-	void typeFloat(float myFloat,unsigned int line=1,unsigned int pos=0);
+    void typeFloat(float myFloat,unsigned int line=1,unsigned int pos=0);
 	/** 
         * Escreve um int
         * line -> linha 1 - 2
         * pos -> coluna 0 - 16
     */
-	void typeInt(int i,unsigned int line=1,unsigned int pos=0);
-    /** 
-        * Retorna em linha = 1 e pos = 0
-    */
-	void home(void);
+    void typeInt(int i,unsigned int line=1,unsigned int pos=0);
     /** 
         * Desliga tela
     */
-	void back_Light_OFF(void);
+    void back_Light_OFF(void);
     /** 
     * Liga tela
     */
@@ -73,12 +63,23 @@ public:
         * Limpa tela
     */
    	void lcd_clear(void);
-
 private:
-	int fd;
-	unsigned int cmd;
-	unsigned long arg;
-	unsigned long pos_new;
+    /** 
+        * Retorna em linha = 1 e pos = 0
+    */
+    void home(void);
+    /** 
+        * Move o cursor
+        * line -> linha 1 - 2
+        * pos -> coluna 0 - 16
+    */
+    void mover_cursor(unsigned int line,unsigned int pos);
+    
+private:
+    int fd;
+    unsigned int cmd;
+    unsigned long arg;
+    unsigned long pos_new;
 };
 
 #endif
