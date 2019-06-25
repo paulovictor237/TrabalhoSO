@@ -5,10 +5,14 @@
 
 using namespace std;
 
+// arrumar o move cursor
+// arrumar o make file applicacao
+// manter desligada a tela
+// mensagem inicial
 
 int main(int argc, char const *argv[])
 {
-	cout << "teste" << endl;
+	cout << "||| APLICAÇÃO INICIADA |||" << endl;
 	//char sair;
 	lcdd displaypv;
 	//displaypv.lcd_clear();
@@ -52,6 +56,3 @@ int main(int argc, char const *argv[])
 	//std::cin >> sair;
 	return 0;
 }
-
-
-
