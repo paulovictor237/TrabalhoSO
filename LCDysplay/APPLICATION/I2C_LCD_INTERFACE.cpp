@@ -34,7 +34,7 @@ void lcdd::mover_cursor(unsigned int line,unsigned int pos){
     * line -> linha 1 - 2
     * pos -> coluna 0 - 16
 */
-void lcdd::lcd_display_string(const char* palavra,unsigned int line=1,unsigned int pos=0){
+void lcdd::lcd_display_string(const char* palavra,unsigned int line,unsigned int pos){
 	mover_cursor(line,pos);
 	write(fd, palavra, 0);
 	sleep(3);
@@ -44,7 +44,7 @@ void lcdd::lcd_display_string(const char* palavra,unsigned int line=1,unsigned i
     * line -> linha 1 - 2
     * pos -> coluna 0 - 16
 */
-void lcdd::typeFloat(float myFloat,unsigned int line=1,unsigned int pos=0){
+void lcdd::typeFloat(float myFloat,unsigned int line,unsigned int pos){
 	char buffer[20];
 	sprintf(buffer, "%4.2f",  myFloat);
 	lcd_display_string(buffer,line,pos);
@@ -54,7 +54,7 @@ void lcdd::typeFloat(float myFloat,unsigned int line=1,unsigned int pos=0){
     * line -> linha 1 - 2
     * pos -> coluna 0 - 16
 */
-void lcdd::typeInt(int i,unsigned int line=1,unsigned int pos=0){
+void lcdd::typeInt(int i,unsigned int line,unsigned int pos){
 	char array1[20];
 	sprintf(array1, "%d",  i);
 	lcd_display_string(array1,line,pos);
