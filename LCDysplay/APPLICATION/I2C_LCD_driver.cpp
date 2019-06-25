@@ -9,6 +9,8 @@
 #include <iostream>
 #include <sys/ioctl.h> /* ioctl */
 
+using namespace std;
+
 // #define # comman
 #define LCD_CLEARDISPLAY 0x01
 #define LCD_RETURNHOME 0x02
@@ -49,39 +51,55 @@
 #define Rw 0b00000010 //# Read/Write bit
 #define Rs 0b00000001 //# Register select bit
 
-
-
 //write(fd, "ABCDEFGHIJKLMNOPQRSTUVXZ", 0);	sleep(3); if(g_stop == 'q') break;
 
 class lcdd{
 public:
 	lcdd(){
 		fd = open("/dev/lcdisplay", O_RDWR);
-		// ioctl(fd,0x03,0);
-		// ioctl(fd,0x03,0);
-		// ioctl(fd,0x03,0);
-		// ioctl(fd,0x02,0);
-		// ioctl(fd,LCD_FUNCTIONSET | LCD_2LINE | LCD_5x8DOTS | LCD_4BITMODE,0);
-		// ioctl(fd,LCD_DISPLAYCONTROL | LCD_DISPLAYON,0);
-		// ioctl(fd,LCD_CLEARDISPLAY,0);
-		// ioctl(fd,LCD_ENTRYMODESET | LCD_ENTRYLEFT,0);
-		// sleep(0.2);
-		write(fd, "Test session 2", 0);
+		write(fd, "LCD Iniciado", 0);
 		sleep(2);
 	}
 	~lcdd(){
 		//close(fd);
 	}
-
-	void lcd_display_string(const char* palavra,unsigned int line=1,unsigned int pos=0){
+	
+	void mover_cursor(unsigned int line,unsigned int pos){
 		if (line == 1)pos_new = pos;
 		else if (line == 2)pos_new = 0x40 + pos;
 		else if (line == 3) pos_new = 0x14 + pos;
 		else if (line == 4)pos_new = 0x54 + pos;
-		ioctl(fd, LCD_CURSORSHIFT, pos_new);
+		ioctl(fd, LCD_CURSORSHIFT, 0x80 +  pos_new);
+	}
+
+
+	void lcd_display_string(const char* palavra,unsigned int line=1,unsigned int pos=0){
+		mover_cursor(line,pos);
 		write(fd, palavra, 0);
 		sleep(3);
 	}
+
+	void typeFloat(float myFloat,unsigned int line=1,unsigned int pos=0)){
+	  char buffer[20];
+	  sprintf(buffer, "%4.2f",  myFloat);
+	  lcd_display_string(buffer,line,pos);
+	}
+
+	// int to string
+	void typeInt(int i,unsigned int line=1,unsigned int pos=0))   {
+	  char array1[20];
+	  sprintf(array1, "%d",  i);
+	  lcd_display_string(array1,line,pos);
+	}
+
+	void home(void){
+		ioctl(fd, LCD_RETURNHOME, 0);
+   	}
+
+	void black_Light(void){
+		ioctl(fd, LCD_BACKLIGHT, 0);
+   	}
+
    	void lcd_clear(void){
 		ioctl(fd, LCD_CLEARDISPLAY, 0);
    	}
