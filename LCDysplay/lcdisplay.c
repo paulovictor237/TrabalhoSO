@@ -279,23 +279,28 @@ static long lcdisplay_ioctl(struct file *file, unsigned int cmd, unsigned long a
 
 	switch(cmd)
 	{
-		case LCD_CLEARDISPLAY::
+		case LCD_CLEARDISPLAY:
+			printk(KERN_DEBUG "LCDisplay: call LCD_CLEARDISPLAY\n");
 			lcdclear(lcd);
 			break;
 		
 		case LCD_RETURNHOME:
+			printk(KERN_DEBUG "LCDisplay: call LCD_RETURNHOME\n");
 			lcdhome(lcd);
 			break;
 
 		case LCD_BACKLIGHT:
+			printk(KERN_DEBUG "LCDisplay: call LCD_BACKLIGHT\n");
 			lcdsetbacklight(lcd, arg);
 			break;
 
 		case LCD_NOBACKLIGHT:
+			printk(KERN_DEBUG "LCDisplay: call LCD_NOBACKLIGHT\n");
 			lcdsetnobacklight(lcd);
 			break;
 
 		case LCD_CURSORSHIFT:
+			printk(KERN_DEBUG "LCDisplay: call  LCD_CURSORSHIFT\n");
 			mover_cursor(lcd,arg);
 			break;
 
@@ -312,7 +317,6 @@ static long lcdisplay_ioctl(struct file *file, unsigned int cmd, unsigned long a
 void mover_cursor(lcd_t *lcd,unsigned long arg){
 	lcd->column = 0;
 	lcd->row = 0;
-	printk(KERN_DEBUG "entrou no LCD_DISPLAYCONTROL\n");
 	lcdsend(lcd, arg , LCD_CMD);
 	return;
 }
@@ -614,7 +618,7 @@ void lcdsetbacklight(lcd_t *l, u8 bl)
 }
 
 
-void lcdsetnobacklight(lcd_t *l);
+void lcdsetnobacklight(lcd_t *l)
 {
 	if(!l)
 		return;
@@ -632,5 +636,5 @@ module_exit(lcdisplay_exit);
 MODULE_LICENSE("GPL");              ///< The license type -- this affects runtime behavior
 MODULE_AUTHOR("Paulo Victor & Matheus Luiz");      ///< The author -- visible when you use modinfo
 MODULE_DESCRIPTION("Driver I2C LCD Display");  ///< The description -- see modinfo
-MODULE_VERSION("1.0");              ///< The version of the module
+MODULE_VERSION("3.0");              ///< The version of the module
 

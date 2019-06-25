@@ -119,5 +119,7 @@ void lcdhome(lcd_t *);
 void lcdrestart(lcd_t *);
 void lcdwrite(lcd_t *, const char *);
 void lcdsetbacklight(lcd_t *, u8);
+void lcdsetnobacklight(lcd_t *l);
+void mover_cursor(lcd_t *lcd,unsigned long arg);
 
 #endif
