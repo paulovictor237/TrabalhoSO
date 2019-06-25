@@ -264,8 +264,8 @@ static ssize_t lcdisplay_read(struct file *file, char __user *buffer, size_t len
  *
  * Currently, the following commands are possible:
  *
- * LCD_CLEAR: 		0x01
- * LCD_HOME:        0x02
+ * LCD_CLEARDISPLAY: 		0x01
+ * LCD_RETURNHOME:        0x02
  * LCD_BACKLIGHT:	0x08
  *
  * @return: number of bytes written to the screen, otherwise a error code will be returned
@@ -279,11 +279,11 @@ static long lcdisplay_ioctl(struct file *file, unsigned int cmd, unsigned long a
 
 	switch(cmd)
 	{
-		case LCD_CLEARDISPLAY://LCD_CLEAR:
+		case LCD_CLEARDISPLAY::
 			lcdclear(lcd);
 			break;
 		
-		case LCD_RETURNHOME://LCD_HOME:
+		case LCD_RETURNHOME:
 			lcdhome(lcd);
 			break;
 
@@ -519,7 +519,7 @@ void lcdclear(lcd_t *l)
     lcd->column = 0;
     lcd->row = 0;
 
-	lcdsend(l, LCD_CLEAR, LCD_CMD);
+	lcdsend(l, LCD_CLEARDISPLAY, LCD_CMD);
 	MSLEEP(2);
 }
 
@@ -537,7 +537,7 @@ void lcdhome(lcd_t *l)
     lcd->column = 0;
     lcd->row = 0;
 
-	lcdsend(l, LCD_HOME, LCD_CMD);
+	lcdsend(l, LCD_RETURNHOME, LCD_CMD);
     MSLEEP(2);
 }
 

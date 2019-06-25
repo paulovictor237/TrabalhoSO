@@ -9,9 +9,10 @@
 #include <sys/ioctl.h> /* ioctl */
 
 // Comandos para chamada de sistema ioctl
-#define LCD_CLEAR           0x01
-#define LCD_HOME            0x02
-#define LCD_BACKLIGHT		0x08
+#define LCD_CLEARDISPLAY 	0x01
+#define LCD_RETURNHOME 		0x02
+#define LCD_BACKLIGHT 		0x08
+#define LCD_CURSORSHIFT 	0x10
 
 char g_stop = 'J';
 
@@ -49,17 +50,17 @@ int main()
 
 	while(g_stop != 'q')
 	{
-		ioctl(fd, LCD_CLEAR, 0);
+		ioctl(fd, LCD_CLEARDISPLAY, 0);
 		
 		write(fd, "Backlight off", 0);				sleep(3); if(g_stop == 'q') break;
 		ioctl(fd, LCD_BACKLIGHT, 0);				sleep(3); if(g_stop == 'q') break;
 
 		write(fd, "? Not anymore", 0);				sleep(3); if(g_stop == 'q') break;
 
-		ioctl(fd, LCD_CLEAR, 0);
+		ioctl(fd, LCD_CLEARDISPLAY, 0);
 		write(fd, "Yes, I cleared the display", 0);	sleep(3); if(g_stop == 'q') break;
 		
-		ioctl(fd, LCD_CLEAR, 0);
+		ioctl(fd, LCD_CLEARDISPLAY, 0);
 		write(fd, "ABCDEFGHIJKLMNOPQRSTUVXZ", 0);	sleep(3); if(g_stop == 'q') break;
 		write(fd, "0123456789", 0);					sleep(3); if(g_stop == 'q') break;
 	}
