@@ -291,6 +291,10 @@ static long lcdisplay_ioctl(struct file *file, unsigned int cmd, unsigned long a
 			lcdsetbacklight(lcd, arg);
 			break;
 
+		case LCD_NOBACKLIGHT:
+			lcdsetnobacklight(lcd);
+			break;
+
 		case LCD_CURSORSHIFT:
 			mover_cursor(lcd,arg);
 			break;
@@ -607,6 +611,15 @@ void lcdsetbacklight(lcd_t *l, u8 bl)
 		return;
 
 	I2C_WRITE(l->handle, bl ? LCD_BACKLIGHT : 0);
+}
+
+
+void lcdsetnobacklight(lcd_t *l);
+{
+	if(!l)
+		return;
+		
+	I2C_WRITE(l->handle,LCD_NOBACKLIGHT);
 }
 
 /*

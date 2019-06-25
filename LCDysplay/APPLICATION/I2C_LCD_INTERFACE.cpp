@@ -68,8 +68,15 @@ void lcdd::home(void){
 /** 
     * Desliga tela
 */
-void lcdd::black_Light(void){
+void lcdd::back_Light_OFF(void){
 	ioctl(fd, LCD_BACKLIGHT, 0);
+	// ioctl(fd, LCD_BACKLIGHT, 1);
+}
+/** 
+    * Liga tela
+*/
+void lcdd::back_Light_ON(void){
+	ioctl(fd, LCD_NOBACKLIGHT, 0);
 }
 /** 
     * Limpa tela

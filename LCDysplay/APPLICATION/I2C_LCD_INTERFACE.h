@@ -18,6 +18,7 @@ using namespace std;
 #define LCD_CLEARDISPLAY 	0x01
 #define LCD_RETURNHOME 		0x02
 #define LCD_BACKLIGHT 		0x08
+#define LCD_NOBACKLIGHT     0x00
 #define LCD_CURSORSHIFT 	0x10
 
 //write(fd, "ABCDEFGHIJKLMNOPQRSTUVXZ", 0);	sleep(3); if(g_stop == 'q') break;
@@ -63,7 +64,11 @@ public:
     /** 
         * Desliga tela
     */
-	void black_Light(void);
+	void back_Light_OFF(void);
+    /** 
+    * Liga tela
+    */
+    void back_Light_ON(void);
     /** 
         * Limpa tela
     */

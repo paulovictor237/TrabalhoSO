@@ -37,6 +37,7 @@
 #define LCD_CLEARDISPLAY 	0x01
 #define LCD_RETURNHOME 		0x02
 #define LCD_BACKLIGHT 		0x08
+#define LCD_NOBACKLIGHT     0x00
 #define LCD_CURSORSHIFT 	0x10
 
 // ========================================================
