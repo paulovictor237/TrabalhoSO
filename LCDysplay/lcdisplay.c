@@ -34,7 +34,7 @@ static int lcdisplay_probe(struct i2c_client *, const struct i2c_device_id *);
 static int lcdisplay_remove(struct i2c_client *);
 
 /*
- * O kernel obtém informações sobre o endereço do dispositivo, o número 
+ * O kernel obtém informações sobre o endereço do dispositivo, o número
  * do barramento e o nome do dispositivo que está sendo registrado através
  * dessa estrutura
  */
@@ -43,7 +43,7 @@ struct i2c_board_info lcdriver_board_info __initdata = {
 };
 
 /*
- * The I2C framework uses it to find the driver that is to be attached to 
+ * The I2C framework uses it to find the driver that is to be attached to
  * a specific I2C device, represented by two members: name and driver_data.
  */
 static const struct i2c_device_id lcdisplay_id[] = {
@@ -53,7 +53,7 @@ static const struct i2c_device_id lcdisplay_id[] = {
 MODULE_DEVICE_TABLE(i2c, lcdisplay_id);
 
 /*
- * For each device on the system, there should be a driver that controls it. For 
+ * For each device on the system, there should be a driver that controls it. For
  * the I2C device, the corresponding driver is represented by struct i2c_driver.
  */
 static struct i2c_driver lcdriver = {
@@ -78,7 +78,7 @@ loff_t 		   lcdisplay_llseek	(struct file *, loff_t, int);
 static long    lcdisplay_ioctl	(struct file *, unsigned int, unsigned long);
 
 /*
- * Essa estrutura contem os ponteiros para funções definidas 
+ * Essa estrutura contem os ponteiros para funções definidas
  * pelo driver que executam varias operações no dispositivo.
  */
 static struct file_operations lcdisplay_fops = {
@@ -95,8 +95,8 @@ static struct file_operations lcdisplay_fops = {
 // ========================================================
 
 /*
- * This function is responsible for performing the first communication 
- * with the display. If all is correct, initialize the structure used 
+ * This function is responsible for performing the first communication
+ * with the display. If all is correct, initialize the structure used
  * to represent it and call the display initialization method.
  *
  * @param: i2c_client *client representa o dispositivo
@@ -106,7 +106,7 @@ static struct file_operations lcdisplay_fops = {
 static int lcdisplay_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
 	int err;
-	
+
 	printk(KERN_DEBUG "LCDisplay: lcdisplay_probe() is called\n");
 
 	lcd = (lcd_t *)devm_kzalloc(&client->dev, sizeof(lcd_t), GFP_KERNEL);
@@ -117,7 +117,7 @@ static int lcdisplay_probe(struct i2c_client *client, const struct i2c_device_id
 	lcd->cdev.owner = THIS_MODULE;
 	lcd->cdev.ops = &lcdisplay_fops;
 	err = cdev_add(&lcd->cdev, MKDEV(lcdisplay_major, lcdisplay_minor), 1);
-	
+
 	if(err)
 	{
 		printk(KERN_NOTICE "Error %d adding cdev", err);
@@ -139,9 +139,9 @@ static int lcdisplay_probe(struct i2c_client *client, const struct i2c_device_id
 
 /*
  * Invokes the display finishing method
- * 
+ *
  * @param: i2c_client *client representa o dispositivo conectado ao barramento i2c
- * @return: return 0 if all happens right, otherwise -1 will be returned 
+ * @return: return 0 if all happens right, otherwise -1 will be returned
  */
 static int lcdisplay_remove(struct i2c_client *client)
 {
@@ -175,7 +175,7 @@ static int lcdisplay_open(struct inode *inode, struct file *file)
     printk(KERN_DEBUG "LCDisplay: lcdisplay_open() is called\n");
 
     if(mutex_lock_interruptible(&lcd->mtx))return -ERESTARTSYS;
-		
+
     try_module_get(THIS_MODULE);
 
     lcdrestart(lcd);
@@ -183,7 +183,7 @@ static int lcdisplay_open(struct inode *inode, struct file *file)
     lcdsetbacklight(lcd, 1);
 
     mutex_unlock(&lcd->mtx);
-	
+
     return 0;
 }
 
@@ -200,13 +200,13 @@ static int lcdisplay_release(struct inode *inode, struct file *file)
 
 	if(mutex_lock_interruptible(&lcd->mtx))
 		return -ERESTARTSYS;
-	
+
 	lcdrestart(lcd);
 	lcdsetbacklight(lcd, 0);
 
     module_put(THIS_MODULE);
 	mutex_unlock(&lcd->mtx);
-    
+
     return 0;
 }
 
@@ -228,7 +228,7 @@ static ssize_t lcdisplay_write(struct file *file, const char __user *buffer, siz
 
 	if(mutex_lock_interruptible(&lcd->mtx))
 		return -ERESTARTSYS;
-	
+
 	lcdwrite(lcd, buffer);
 
 	mutex_unlock(&lcd->mtx);
@@ -242,7 +242,7 @@ static ssize_t lcdisplay_write(struct file *file, const char __user *buffer, siz
  * Routine call when the read system call is performed at the user level
  *
  * @param: struct file *file
- * @param: char __user *buffer 
+ * @param: char __user *buffer
  * @param: size_t length
  * @param: loff_t *offset
  * @return:
@@ -283,7 +283,7 @@ static long lcdisplay_ioctl(struct file *file, unsigned int cmd, unsigned long a
 			printk(KERN_DEBUG "LCDisplay: call LCD_CLEARDISPLAY\n");
 			lcdclear(lcd);
 			break;
-		
+
 		case LCD_RETURNHOME:
 			printk(KERN_DEBUG "LCDisplay: call LCD_RETURNHOME\n");
 			lcdhome(lcd);
@@ -306,7 +306,7 @@ static long lcdisplay_ioctl(struct file *file, unsigned int cmd, unsigned long a
 
 		default:
 			printk(KERN_DEBUG "LCDisplay: unknown IOCTL\n");
-	      	break; 
+	      	break;
 	}
 
 	mutex_unlock(&lcd->mtx);
@@ -331,7 +331,7 @@ void mover_cursor(lcd_t *lcd,unsigned long arg){
  * @return: none
  */
 static int __init lcdisplay_init(void)
-{	
+{
 	int tmp;
     dev_t dev = 0;
 
@@ -345,19 +345,19 @@ static int __init lcdisplay_init(void)
 		dev = MKDEV(lcdisplay_major, lcdisplay_minor);
 		tmp = register_chrdev_region(dev, 1, LCD_NAME);
 	}
-	
+
 	else // Alocacao dinamica de major
 	{
 		tmp = alloc_chrdev_region(&dev, lcdisplay_minor, 1, LCD_NAME);
 		lcdisplay_major = MAJOR(dev);
 	}
-	
+
     if(tmp < 0)
     {
         printk(KERN_WARNING "LCDisplay: can't get major number %d\n", lcdisplay_major);
         return tmp;
     }
-	
+
     // Part 02 =======================================================
     // Informa o kernel sobre o dispositivo presente no barramento I2C
 
@@ -385,7 +385,7 @@ static int __init lcdisplay_init(void)
     i2c_put_adapter(adapter);
 
     return 0; /* Succeed */
-	
+
 	fail:
 		unregister_chrdev_region(dev, 1);
 		if(client)
@@ -402,7 +402,7 @@ static int __init lcdisplay_init(void)
 static void __exit lcdisplay_exit(void)
 {
 	printk(KERN_DEBUG "LCDisplay: lcdisplay_exit() is called\n");
-	
+
 	unregister_chrdev_region(MKDEV(lcdisplay_major, lcdisplay_minor), 1);
     unregister_chrdev(lcdisplay_major, LCD_NAME);
 
@@ -448,7 +448,7 @@ static void lcdsend(lcd_t *l, int bits, int mode)
 {
 	u8 bits_high;
 	u8 bits_low;
-	
+
 	if(!l)
 		return;
 
@@ -483,10 +483,10 @@ void lcdinit(lcd_t *l)
 	lcdsend(l, 0x06, LCD_CMD); // Cursor move direction
 	lcdsend(l, 0x0C, LCD_CMD); // 0x0F Blink On, 0x0C Blink Off
 	lcdsend(l, 0x28, LCD_CMD); // Data length, number of lines, font size
-	
+
 	lcdclear(l); // Clear display
 	lcdhome(l);  // Move curosr to home
-	
+
 	USLEEP(500);
 
 	l->row = 0;
@@ -506,10 +506,10 @@ void lcdinit(lcd_t *l)
 void lcdfinalize(lcd_t *l)
 {
 	printk(KERN_DEBUG "LCDisplay: lcdfinalize() is called\n");
-	
+
 	if(!l)
 		return;
-	
+
 	lcdrestart(l);
 	// CERVEJA
 	lcdsetbacklight(l, 0);
@@ -583,7 +583,7 @@ void lcdwrite(lcd_t *l, const char *s)
 		lcdsend(l, *(s++), LCD_CHR);
 
         lcd->column++;
-        
+
         if(lcd->column == 16) // Number of columns
         {
         	if(lcd->row == 0)
@@ -624,7 +624,7 @@ void lcdsetnobacklight(lcd_t *l)
 {
 	if(!l)
 		return;
-		
+
 	I2C_WRITE(l->handle,LCD_NOBACKLIGHT);
 }
 
@@ -636,7 +636,6 @@ module_init(lcdisplay_init);
 module_exit(lcdisplay_exit);
 
 MODULE_LICENSE("GPL");              ///< The license type -- this affects runtime behavior
-MODULE_AUTHOR("Paulo Victor & Matheus Luiz");      ///< The author -- visible when you use modinfo
+MODULE_AUTHOR("Paulo Victor Duarte & Matheus Luiz Anderle de Souza");      ///< The author -- visible when you use modinfo
 MODULE_DESCRIPTION("Driver I2C LCD Display");  ///< The description -- see modinfo
 MODULE_VERSION("3.0");              ///< The version of the module
-
