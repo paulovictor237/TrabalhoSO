@@ -1,30 +1,17 @@
-SOBRE
 ====================================================================
-
 Driver para um display LCD utilizando comunicação I2C em uma Raspberry Pi.
 
-:Autor: Jesuino Vieira Filho
-:Autor: Lucas de Camargo Souza
+:Autor: Paulo Victor Duarte
+:Autor: Matheus Luiz Anderle de Souza
 
-Universidade Federal de Santa Catarina (Campus Joinville) - 2018/2
-EMB5632 - Sistemas Operacionais
+Universidade Federal de Santa Catarina (Campus Joinville)
+EMB5632(20191) - Sistemas Operacionais
 
-Para informações mais detalhadas, consulte **Relatório.pdf**.
-
-EXECUTANDO
+COMANDOS
 ====================================================================
 
-Inicialize o terminal na pasta que contém os seguintes arquivos e 
-digite para:
+Inicie o terminal na pasta /LCDysplay.
 
---------------------------------------------------------------------
-Arquivos:
-	Makefile
-	lcdisplay.c
-	lcdisplay.h
-	load.sh
-	unload.sh
-	lcd.c
 --------------------------------------------------------------------
 Compilar o módulo:
 	$ sudo make
@@ -32,11 +19,20 @@ Compilar o módulo:
 Carregar o módulo no kernel:
 	$ sudo make load
 --------------------------------------------------------------------
-Executar o programa de teste:
-	$ make run APPLICATION=lcd
+Descarregar o módulo do kernel:
+	$ sudo make unload
 --------------------------------------------------------------------
 Remover os arquivos gerados pelo módulo:
 	$ sudo make clean
 --------------------------------------------------------------------
-Descarregar o módulo do kernel:
-	$ sudo make unload
+Mostrar System Calls do Driver
+	$ make print
+--------------------------------------------------------------------
+Mostrar informações do Driver
+	$ make info
+--------------------------------------------------------------------
+Mostrar modulos ativos no kernel
+	$ make modulos
+--------------------------------------------------------------------
+Rodar Aplicação
+	$ make app
