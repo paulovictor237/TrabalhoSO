@@ -5,45 +5,42 @@
 
 using namespace std;
 
-// arrumar o move cursor - OK
-// arrumar o make file applicacao
-// manter desligada a tela
-// mensagem inicial -OK
-
 int main(int argc, char const *argv[])
 {
 	cout << "||| APLICAÇÃO INICIADA |||" << endl;
-	//char sair;
 	lcdd displaypv;
-	//displaypv.lcd_clear();
-	displaypv.lcd_display_string("teste do pv",2,4);
-    sleep(1);
-    //-----------------------------
-    displaypv.lcdd::lcd_clear();
-	sleep(1);
-	displaypv.lcdd::lcd_display_string("batatinha MC'Donalds");
-	sleep(1);
-	displaypv.lcdd::lcd_clear();
-	sleep(1);
-	displaypv.lcdd::typeFloat(13.45);
-	sleep(1);
-	displaypv.lcdd::typeInt(55,2,8);
-	sleep(1);
-	displaypv.lcdd::lcd_clear();
-	displaypv.lcdd::lcd_display_string("desligar luz");
-	sleep(1);
-	displaypv.lcdd::back_Light_OFF();
-	sleep(1);
-	//displaypv.lcdd::lcd_clear();
-	//displaypv.lcdd::lcd_display_string("Ligar luz");
-	sleep(1);
-	displaypv.lcdd::back_Light_ON();
-	sleep(1);
-	//displaypv.lcdd::lcd_clear();
-	//displaypv.lcdd::lcd_display_string("FIM");
-	sleep(5);
-    //-----------------------------
-    std::cout << "FIM" << endl;
-	//std::cin >> sair;
+	sleep(3);
+	displaypv.lcd_clear();
+	displaypv.lcd_display_string("APLICACAO",1,4);
+	displaypv.lcd_display_string("INICIADA",2,4);
+  //-----------------------------
+	sleep(3);
+	displaypv.lcd_clear();
+	displaypv.lcd_display_string("Linha 1",1);
+	displaypv.lcd_display_string("Linha 2",2);
+	sleep(3);
+	displaypv.lcd_clear();
+	displaypv.lcd_display_string("Escrever float");
+	displaypv.typeFloat(13.45,2,5);
+	sleep(3);
+	displaypv.lcd_clear();
+	displaypv.lcd_display_string("Escrever int");
+	displaypv.typeInt(456,2,6);
+	sleep(3);
+	displaypv.lcd_clear();
+	displaypv.lcd_display_string("Desligar luz");
+	sleep(3);
+	displaypv.back_Light_OFF();
+	sleep(3);
+	displaypv.back_Light_ON();
+	sleep(3);
+	displaypv.lcd_clear();
+	displaypv.lcd_display_string("Ligar luz");
+	sleep(3);
+	displaypv.lcd_clear();
+	displaypv.lcd_display_string("FIM DO PROGRAMA");
+	sleep(3);
+  //-----------------------------
+	cout << "||| FIM DA APLICAÇÃO |||" << endl;
 	return 0;
 }

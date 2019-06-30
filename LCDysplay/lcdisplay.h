@@ -6,8 +6,8 @@
  *
  * The source code in this file can be freely used, adapted,
  * and redistributed in source or binary form, so long as an
- * acknowledgment appears in derived source files. No warranty 
- * is attached; we cannot take responsibility for errors or 
+ * acknowledgment appears in derived source files. No warranty
+ * is attached; we cannot take responsibility for errors or
  * fitness for use.
  */
 
@@ -33,12 +33,11 @@
 #define LCD_ENABLE          0x04 		// Enable bit
 
 // LCD Commands
-
-#define LCD_CLEARDISPLAY 	0x01
-#define LCD_RETURNHOME 		0x02
-#define LCD_BACKLIGHT 		0x08
-#define LCD_NOBACKLIGHT     0x00
-#define LCD_CURSORSHIFT 	0x10
+#define LCD_CLEARDISPLAY  0x01
+#define LCD_RETURNHOME    0x02
+#define LCD_BACKLIGHT     0x08
+#define LCD_NOBACKLIGHT   0x00
+#define LCD_CURSORSHIFT   0x10
 
 // ========================================================
 // #define # comman
