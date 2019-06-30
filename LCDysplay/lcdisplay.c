@@ -638,4 +638,4 @@ module_exit(lcdisplay_exit);
 MODULE_LICENSE("GPL");              ///< The license type -- this affects runtime behavior
 MODULE_AUTHOR("Paulo Victor Duarte & Matheus Luiz Anderle de Souza");      ///< The author -- visible when you use modinfo
 MODULE_DESCRIPTION("Driver I2C LCD Display");  ///< The description -- see modinfo
-MODULE_VERSION("3.0");              ///< The version of the module
+MODULE_VERSION("4.0");              ///< The version of the module
