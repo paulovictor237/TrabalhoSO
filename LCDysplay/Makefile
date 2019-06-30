@@ -38,3 +38,9 @@ info:
 
 modulos:
 	lsmod
+
+app:
+	cd APPLICATION; \
+    g++ *.cpp -o Executavel -pthread; \
+    ./Executavel
+	

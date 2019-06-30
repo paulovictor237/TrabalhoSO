@@ -172,17 +172,17 @@ static int lcdisplay_remove(struct i2c_client *client)
  */
 static int lcdisplay_open(struct inode *inode, struct file *file)
 {
-	printk(KERN_DEBUG "LCDisplay: lcdisplay_open() is called\n");
+    printk(KERN_DEBUG "LCDisplay: lcdisplay_open() is called\n");
 
-	if(mutex_lock_interruptible(&lcd->mtx))
-		return -ERESTARTSYS;
+    if(mutex_lock_interruptible(&lcd->mtx))return -ERESTARTSYS;
 		
     try_module_get(THIS_MODULE);
 
     lcdrestart(lcd);
+    // CERVEJA
     lcdsetbacklight(lcd, 1);
 
-	mutex_unlock(&lcd->mtx);
+    mutex_unlock(&lcd->mtx);
 	
     return 0;
 }
@@ -264,8 +264,8 @@ static ssize_t lcdisplay_read(struct file *file, char __user *buffer, size_t len
  *
  * Currently, the following commands are possible:
  *
- * LCD_CLEAR: 		0x01
- * LCD_HOME:        0x02
+ * LCD_CLEARDISPLAY: 		0x01
+ * LCD_RETURNHOME:        0x02
  * LCD_BACKLIGHT:	0x08
  *
  * @return: number of bytes written to the screen, otherwise a error code will be returned
@@ -279,16 +279,29 @@ static long lcdisplay_ioctl(struct file *file, unsigned int cmd, unsigned long a
 
 	switch(cmd)
 	{
-		case LCD_CLEAR:
+		case LCD_CLEARDISPLAY:
+			printk(KERN_DEBUG "LCDisplay: call LCD_CLEARDISPLAY\n");
 			lcdclear(lcd);
 			break;
 		
-		case LCD_HOME:
+		case LCD_RETURNHOME:
+			printk(KERN_DEBUG "LCDisplay: call LCD_RETURNHOME\n");
 			lcdhome(lcd);
 			break;
 
 		case LCD_BACKLIGHT:
+			printk(KERN_DEBUG "LCDisplay: call LCD_BACKLIGHT\n");
 			lcdsetbacklight(lcd, arg);
+			break;
+
+		case LCD_NOBACKLIGHT:
+			printk(KERN_DEBUG "LCDisplay: call LCD_NOBACKLIGHT\n");
+			lcdsetnobacklight(lcd);
+			break;
+
+		case LCD_CURSORSHIFT:
+			printk(KERN_DEBUG "LCDisplay: call  LCD_CURSORSHIFT\n");
+			mover_cursor(lcd,arg);
 			break;
 
 		default:
@@ -300,6 +313,16 @@ static long lcdisplay_ioctl(struct file *file, unsigned int cmd, unsigned long a
 
 	return 0;
 }
+
+void mover_cursor(lcd_t *lcd,unsigned long arg){
+	lcd->column = 0;
+	lcd->row = 0;
+	lcdsend(lcd, arg , LCD_CMD);
+	return;
+}
+
+
+
 
 /*
  * Invoked when the module is loaded into the kernel
@@ -470,7 +493,8 @@ void lcdinit(lcd_t *l)
 	l->column = 0;
 
 	lcdsend(l, LCD_LINE0, LCD_CMD);
-	lcdwrite(l, "Driver LCDisplay");
+	//lcdwrite(l, "Driver LCDisplay");
+	lcdwrite(l, "Driver Iniciado");
 }
 
 /*
@@ -487,6 +511,7 @@ void lcdfinalize(lcd_t *l)
 		return;
 	
 	lcdrestart(l);
+	// CERVEJA
 	lcdsetbacklight(l, 0);
 }
 
@@ -504,7 +529,7 @@ void lcdclear(lcd_t *l)
     lcd->column = 0;
     lcd->row = 0;
 
-	lcdsend(l, LCD_CLEAR, LCD_CMD);
+	lcdsend(l, LCD_CLEARDISPLAY, LCD_CMD);
 	MSLEEP(2);
 }
 
@@ -522,7 +547,7 @@ void lcdhome(lcd_t *l)
     lcd->column = 0;
     lcd->row = 0;
 
-	lcdsend(l, LCD_HOME, LCD_CMD);
+	lcdsend(l, LCD_RETURNHOME, LCD_CMD);
     MSLEEP(2);
 }
 
@@ -594,6 +619,15 @@ void lcdsetbacklight(lcd_t *l, u8 bl)
 	I2C_WRITE(l->handle, bl ? LCD_BACKLIGHT : 0);
 }
 
+
+void lcdsetnobacklight(lcd_t *l)
+{
+	if(!l)
+		return;
+		
+	I2C_WRITE(l->handle,LCD_NOBACKLIGHT);
+}
+
 /*
  * As macros module_init e module_exit notificam o
  * kernel sobre o dispositivo carregado e descarregado.
@@ -604,5 +638,5 @@ module_exit(lcdisplay_exit);
 MODULE_LICENSE("GPL");              ///< The license type -- this affects runtime behavior
 MODULE_AUTHOR("Paulo Victor & Matheus Luiz");      ///< The author -- visible when you use modinfo
 MODULE_DESCRIPTION("Driver I2C LCD Display");  ///< The description -- see modinfo
-MODULE_VERSION("1.0");              ///< The version of the module
+MODULE_VERSION("3.0");              ///< The version of the module
 
