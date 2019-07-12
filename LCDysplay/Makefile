@@ -25,22 +25,20 @@ unload:
 	sudo chmod 777 unload.sh
 	sudo ./unload.sh
 
-# Compile and run the application test
-run:
-	gcc $(APPLICATION).c -o $(APPLICATION) -pthread -Wall
-	./$(APPLICATION)
-
+# Mostrar System Calls do Driver
 print:
 	dmesg | tail
 
+# Mostrar informações do Driver
 info:
 	modinfo ./$(TARGET_MODULE).ko
 
+# Mostrar modulos ativos no kernel
 modulos:
 	lsmod
 
+# Rodar Aplicação
 app:
 	cd APPLICATION; \
     g++ *.cpp -o Executavel -pthread; \
     ./Executavel
-	
